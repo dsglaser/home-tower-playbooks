@@ -4,7 +4,7 @@
 
   tasks:
     
-    name: Update system
+  - name: Update system
     yum:
       name: '*'
       state: latest
