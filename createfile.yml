@@ -23,9 +23,9 @@
           insertafter: "^# lcredit ="
 
       - name: 1.6.1.2 - Set SELinux policy to {{ selinux_policy }}
-        replace:
-          dest: /etc/selinux.cfg
+        lineinfile:
+          path: /etc/selinux.cfg
           regexp: "^SELINUXTYPE=((?!{{ selinux_policy }}).)*$"
-          replace: "SELINUXTYPE={{ selinux_policy }}"
+          line: "SELINUXTYPE={{ selinux_policy }}"
           create: yes
 
