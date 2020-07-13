@@ -1,7 +1,8 @@
 ---
 - hosts: tower-client2
   become: yes
-  vars_files: " {{ vars_file }}"
+  vars:
+    password_min_length: 6
 
   tasks:
 
