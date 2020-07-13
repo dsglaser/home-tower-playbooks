@@ -1,5 +1,5 @@
 ---
-- hosts: tower-client2
+- hosts: tower-clients
   become: yes
   vars:
     password_min_length: 6
