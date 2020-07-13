@@ -1,12 +1,15 @@
 ---
-- hosts: all
+- hosts: tower-client2
   become: yes
+  vars_files: vars.yml
 
   tasks:
     
-  - name: Update system
+  - name: install system packages
     yum:
-      name: '*'
-      state: latest
+      name: "{{ ansible_base_pkgs | union( ansible_opt_pkgs ) }}"
+      state: "{{ package_state | default(omit) | string }}"
 
-
+  - name: Print local hosts
+    debug:
+     var: local_hosts

@@ -1,0 +1,9 @@
+ansible_base_pkgs:
+  - vsftpd
+
+ansible_opt_pkgs:
+  - traceroute
+
+package_state: latest
+
+local_hosts: "{{ query('file', '/etc/hosts') }}"

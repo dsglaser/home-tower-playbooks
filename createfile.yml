@@ -1,0 +1,34 @@
+---
+- hosts: tower-client2
+  become: yes
+  vars_files: " {{ vars_file }}"
+
+  tasks:
+
+      - name: Require at least {{ password_min_length }} characters in passwords
+        lineinfile:
+          path: /etc/pwquality.conf
+          line: minlen = {{ password_min_length }}
+          regexp: "^minlen = {{ password_min_length }}"
+          insertafter: "^# minlen ="
+
+      - name: require at least one lowercase letter in passwords
+        lineinfile:
+          path: /etc/pwquality.conf
+          line: lcredit = -1
+          regexp: "^lcredit = -1"
+          insertafter: "^# lcredit ="
+
+      - name: Require at least {{ password_min_length }} characters in passwords
+        lineinfile:
+          path: /etc/pwquality.conf
+          line: minlen = {{ password_min_length }}
+          regexp: "^minlen = {{ password_min_length }}"
+          insertafter: "^# minlen ="
+
+      - name: 1.6.1.2 - Set SELinux policy to {{ selinux_policy }}
+        replace:
+          dest=/etc/selinux.cfg
+          regexp="^SELINUXTYPE=((?!{{ selinux_policy }}).)*$"
+          replace="SELINUXTYPE={{ selinux_policy }}"
+
