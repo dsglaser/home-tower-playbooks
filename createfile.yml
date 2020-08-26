@@ -11,7 +11,7 @@
         lineinfile:
           path: /etc/security/pwquality.conf
           line: minlen = {{ password_min_length }}
-          regexp: "^minlen = {{ password_min_length }}"
+          regexp: "^minlen = ((?!{{ password_min_length }}).)*$"
           insertafter: "^# minlen ="
           create: yes
 
