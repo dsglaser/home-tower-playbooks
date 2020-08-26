@@ -25,7 +25,7 @@
 
       - name: 1.6.1.2 - Set SELinux policy to {{ selinux_policy }}
         lineinfile:
-          path: /etc/config/selinux.cfg
+          path: /etc/selinux/config
           regexp: "^SELINUX=((?!{{ selinux_config | lower }}).)*$"
           line: "SELINUX={{ selinux_config }}"
 
