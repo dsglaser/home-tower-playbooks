@@ -9,23 +9,23 @@
 
       - name: Require at least {{ password_min_length }} characters in passwords
         lineinfile:
-          path: /etc/pwquality.conf
+          path: /etc/security/pwquality.conf
           line: minlen = {{ password_min_length }}
           regexp: "^minlen = {{ password_min_length }}"
           insertafter: "^# minlen ="
           create: yes
 
       - name: require at least one lowercase letter in passwords
-        lineinfile:
-          path: /etc/pwquality.conf
-          line: lcredit = -1
-          regexp: "^lcredit = -1"
-          insertafter: "^# lcredit ="
+        copy:
+          dest: /etc/motd
+          content: "{{ motd }}"
+          owner: root
+          group: root
+          mode: 0644
 
       - name: 1.6.1.2 - Set SELinux policy to {{ selinux_policy }}
         lineinfile:
-          path: /etc/selinux.cfg
-          regexp: "^SELINUXTYPE=((?!{{ selinux_policy }}).)*$"
-          line: "SELINUXTYPE={{ selinux_policy }}"
-          create: yes
+          path: /etc/config/selinux.cfg
+          regexp: "^SELINUX=((?!{{ selinux_config | lower }}).)*$"
+          line: "SELINUX={{ selinux_config }}"
 
