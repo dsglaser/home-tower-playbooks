@@ -3,7 +3,8 @@
   become: yes
   vars:
     password_min_length: 5
-    selinux_policy: default
+    selinux_config: Disabled
+    motd: "Welcome aboard!"
 
   tasks:
 
