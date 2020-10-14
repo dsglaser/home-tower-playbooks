@@ -1,32 +1,17 @@
 ---
-- hosts: tower-clients
+- hosts: tower_clients
   become: yes
   vars:
-    password_min_length: 5
-    selinux_config: Disabled
-    motd: "Welcome aboard!"
+    motd: "This machine is updated on"
 
   tasks:
-
-      - name: Require at least {{ password_min_length }} characters in passwords
-        lineinfile:
-          path: /etc/security/pwquality.conf
-          line: minlen = {{ password_min_length }}
-          regexp: "^minlen = ((?!{{ password_min_length }}).)*$"
-          insertafter: "^# minlen ="
-          create: yes
 
       - name: set the message of the day on the machine
         copy:
           dest: /etc/motd
-          content: "{{ motd }}"
+          content: "{{ motd }} {{ ansible_date_time.date }}"
           owner: root
           group: root
           mode: 0644
 
-      - name: Set SELinux policy to {{ selinux_config }}
-        lineinfile:
-          path: /etc/selinux/config
-          regexp: "^SELINUX=((?!{{ selinux_config | lower }}).)*$"
-          line: "SELINUX={{ selinux_config|lower }}"
 

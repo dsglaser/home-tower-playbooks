@@ -1,5 +1,5 @@
 ---
-- hosts: tower_client1
+- hosts: tower_clientS
   become: yes
   vars_files: vars.yml
 
@@ -7,7 +7,7 @@
    - { role: config_selinux }
 
   tasks:
-    
+
   - name: install system packages
     yum:
       name: "{{ ansible_base_pkgs | union( ansible_opt_pkgs ) }}"
