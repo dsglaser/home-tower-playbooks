@@ -16,7 +16,7 @@
           insertafter: "^# minlen ="
           create: yes
 
-      - name: require at least one lowercase letter in passwords
+      - name: set the message of the day on the machine
         copy:
           dest: /etc/motd
           content: "{{ motd }}"
@@ -24,7 +24,7 @@
           group: root
           mode: 0644
 
-      - name: 1.6.1.2 - Set SELinux policy to {{ selinux_policy }}
+      - name: Set SELinux policy to {{ selinux_config }}
         lineinfile:
           path: /etc/selinux/config
           regexp: "^SELINUX=((?!{{ selinux_config | lower }}).)*$"

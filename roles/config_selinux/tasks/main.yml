@@ -1,0 +1,70 @@
+---
+# tasks file for config_selinux
+  # Use system package manager to remove
+  - name: 1.7.1.1 - Ensure SELinux is installed
+    dnf:
+      name:
+        - libselinux
+        - python3-libselinux
+      state: present
+    when: selinux is defined and selinux != "Disabled"
+    tags:
+      - 1.7.1.1
+
+  # re-gather system facts in case we installed selinux packages.
+  #  If selinux wasn't installed, it will not populate ansible_selinux fact correctly, regathering
+  #  will pull it with the right information
+  - name: Regather facts
+    setup:
+    tags:
+      - 1.7.1.1
+
+  # Use the replace module to remove any disablment of selinux in grub if
+  #  it isn't expressly disabled from a variable
+  - name: 1.7.1.2 - Ensure SELinux is not disabled in bootloader configuration
+    replace:
+      dest: /etc/default/grub
+      regexp: "{{ item }}"
+      replace: ""
+    with_items:
+      - selinux=0
+      - enforcing=0
+    when: selinux is defined and selinux != "Disabled"
+    notify: rebuild grub
+    tags:
+      - 1.7.1.2
+
+  # Replace the current selinux policy with whatever the variable is set for
+  - name: 1.7.1.3 - Set SELinux policy to {{ selinux_policy }}
+    replace:
+      dest: /etc/selinux/config
+      regexp: "^SELINUXTYPE=((?!{{ selinux_policy }}).)*$"
+      replace: "SELINUXTYPE={{ selinux_policy }}"
+    when: ( selinux is defined and selinux_policy is defined ) and selinux != "Disabled"
+    tags:
+      - 1.7.1.3
+
+  # If we are going to be enabling selinux in passive or enforcing mode,
+  #  set the autorelabel and notify the machine to reboot
+  - name: 1.7.1.3 - If disabled and we are enabling it, autorelabel
+    file:
+      path: /.autorelabel
+      owner: root
+      group: root
+      mode: 0644
+      state: touch
+    when: ansible_selinux.status == "disabled" and selinux | lower != "disabled"
+    notify: reboot
+    tags:
+      - 1.7.1.3
+
+  # Replace the current selinux mode with what the variable is set to
+  - name: 1.7.1.4 - Set SELinux to {{ selinux | lower }}
+    replace:
+      dest: /etc/selinux/config
+      regexp: "^SELINUX=((?!{{ selinux }}).)*$"
+      replace: "SELINUX={{ selinux | lower }}"
+    when: selinux is defined and ( selinux | lower == "enforcing" or selinux | lower == "permissive" or selinux | lower == "disabled" )
+    notify: reboot
+    tags:
+      - 1.7.1.4

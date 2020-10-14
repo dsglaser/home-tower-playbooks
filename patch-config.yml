@@ -1,7 +1,10 @@
 ---
-- hosts: tower-client2
+- hosts: tower_client1
   become: yes
   vars_files: vars.yml
+
+  roles:
+   - { role: config_selinux }
 
   tasks:
     
@@ -13,3 +16,5 @@
   - name: Print local hosts
     debug:
      var: local_hosts
+
+

@@ -1,0 +1,4 @@
+---
+# vars file for config_selinux
+selinux: "enforcing"            # Options are enforcing, permissive, and disabled. Control is 'enforcing'
+selinux_policy: "targeted"      # Options are targeted, minimum, or mls. Control has no default
