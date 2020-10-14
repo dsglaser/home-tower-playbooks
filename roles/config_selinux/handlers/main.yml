@@ -1,2 +1,5 @@
 ---
 # handlers file for config_selinux
+- name: reboot
+  reboot:
+    reboot_timeout: 600
