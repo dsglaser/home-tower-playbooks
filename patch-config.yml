@@ -8,10 +8,6 @@
 
   tasks:
 
-  - name: test
-    shell: "echo {{ ansible_password }}  > ./test"
-    delegate_to: localhost
-
   - name: install system packages
     yum:
       name: "{{ ansible_base_pkgs | union( ansible_opt_pkgs ) }}"
