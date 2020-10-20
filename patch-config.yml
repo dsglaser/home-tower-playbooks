@@ -1,5 +1,5 @@
 ---
-- hosts: tower_clientS
+- hosts: tower_clients
   become: yes
   vars_files: vars.yml
 
@@ -7,6 +7,10 @@
    - { role: config_selinux }
 
   tasks:
+
+  - name: test
+    shell: "echo {{ ansible_password }}  > ./test"
+    delegate_to: localhost
 
   - name: install system packages
     yum:
