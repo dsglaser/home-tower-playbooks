@@ -7,5 +7,5 @@
 
   - name: install system packages
     debug: 
-     mesg: "Unable to set selinux config info. Check selinux variable"
+     msg: "Unable to set selinux config info. Check selinux variable"
 
