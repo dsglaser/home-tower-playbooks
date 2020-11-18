@@ -4,7 +4,7 @@
   - name: 1.7.1.1 - Check if selinux is a valid choic
     fail:
       mesg: "selinux variable must be 'enforcing', 'permissive' or disabled'"
-    when: selinux is defined and ( selinux | lower == "enforcing" or selinux | lower == "permissive" or selinux | lower == "disabled" )
+    when: selinux is defined and not ( selinux | lower == "enforcing" or selinux | lower == "permissive" or selinux | lower == "disabled" )
 
   - name: 1.7.1.1 - Ensure SELinux is installed
     dnf:
