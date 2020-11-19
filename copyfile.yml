@@ -1,0 +1,16 @@
+---
+- hosts: tower_clients
+  become: yes
+  vars_files: vars.yml
+
+
+  tasks:
+
+
+  - name: Copy test file
+    copy: 
+      src: "./copy_files/testfile"
+      dest: /etc/testfile
+      owner: root
+      group: root
+
