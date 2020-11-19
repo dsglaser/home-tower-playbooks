@@ -17,4 +17,10 @@
     debug:
      var: local_hosts
 
+  - name: Copy test file
+    copy: 
+      src: "./copy_files/testfile"
+      dest: /etc/testfile
+      owner: root
+      group: root
 
