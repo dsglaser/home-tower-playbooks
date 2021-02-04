@@ -8,21 +8,21 @@
 # Update an exisitng fact, dot or bracket notation
   - name: Set a fact
     ansible.builtin.set_fact:
-      a:
-        b:
-          c:
+      my:
+        cool:
+          fact:
           - 1
           - 2
   
   - name: Update the fact
     ansible.utils.update_fact:
       updates:
-      - path: a.b.c.0
+      - path: my.cool.fact.0
         value: 10
-      - path: "a['b']['c'][1]"
+      - path: my.cool.fact.1
         value: 20
     register: updated
   
   - debug:
-      var: updated.a
+      var: updated.my
   
