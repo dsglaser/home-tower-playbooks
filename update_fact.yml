@@ -1,5 +1,5 @@
 ---
-- hosts: client1
+- hosts: tower_clients
   become: yes
   vars:
 
