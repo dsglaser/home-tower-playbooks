@@ -1,0 +1,37 @@
+---
+- hosts: tower_clients
+  become: yes
+
+  tasks:
+
+    - name: Install packages
+      yum:
+        name: httpd
+        state: latest
+
+    - name: Open http port
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+
+    - name: copy repo to the remote machine
+      git:
+        repo: ssh://git@github.com:dsglaser/ci_cd-app.git
+        dest: /var/www/html
+        key_file: /etc/repo_key
+        
+    - name: set selinux contexts
+      file: 
+        path: /var/www/html
+        recurse: yes
+        owner: apache
+        group: apache
+        mode: 0644
+        setype: http_t
+        state: directory
+
+    - name: verify file is accessible
+      get_url:
+        url: http://10.8.108.213/ci_cd-app/index.html
+
