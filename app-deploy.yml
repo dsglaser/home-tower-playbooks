@@ -22,7 +22,8 @@
         repo: ssh://git@github.com/dsglaser/ci_cd-app.git
         dest: /var/www/html
         key_file: /etc/repo_key
-        
+        accept_hostkey: yes
+
     - name: set selinux contexts
       file: 
         path: /var/www/html
