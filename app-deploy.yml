@@ -25,13 +25,13 @@
         key_file: /etc/repo_key
         accept_hostkey: yes
 
+
     - name: set selinux contexts
       file: 
         path: /var/www/html
         recurse: yes
         owner: apache
         group: apache
-        mode: 0644
         setype: httpd_sys_content_t
         state: directory
 
