@@ -16,6 +16,7 @@
         service: http
         permanent: yes
         state: enabled
+        immediate: yes
 
     - name: copy repo to the remote machine
       git:
