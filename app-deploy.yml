@@ -19,7 +19,7 @@
 
     - name: copy repo to the remote machine
       git:
-        repo: ssh://git@github.com:dsglaser/ci_cd-app.git
+        repo: ssh://git@github.com/dsglaser/ci_cd-app.git
         dest: /var/www/html
         key_file: /etc/repo_key
         
