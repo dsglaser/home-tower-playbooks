@@ -31,7 +31,7 @@
         owner: apache
         group: apache
         mode: 0644
-        setype: http_t
+        setype: httpd_sys_content_t
         state: directory
 
     - name: verify file is accessible
