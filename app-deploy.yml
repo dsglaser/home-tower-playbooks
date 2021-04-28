@@ -6,7 +6,9 @@
 
     - name: Install packages
       yum:
-        name: httpd
+        name: 
+          - httpd
+          - git
         state: latest
 
     - name: Open http port
