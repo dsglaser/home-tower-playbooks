@@ -42,5 +42,5 @@
 
     - name: verify file is accessible
       get_url:
-        url: http://10.8.108.213/ci_cd-app/index.html
+        url: http://10.8.108.213/index.html
         dest: /tmp/test.html
