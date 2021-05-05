@@ -1,0 +1,12 @@
+- hosts: localhost
+  vars: 
+  tasks:
+
+
+    - name: REmove kernel.panic entry from /etc/sysctl.conf
+      ansible.posix.sysctl:
+        name: kernel.panic
+        state: absent
+        sysctl_file: /etc/sysctl.conf
+                                                                              
+
