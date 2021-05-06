@@ -14,3 +14,10 @@
   roles:    
      - role: dsglaser.nginx.nginx
         
+  post-tasks:
+    - name: enable firewall
+      firewalld:
+        service: http
+        permanent: yes
+        state: enabled
+        immediate: yes
