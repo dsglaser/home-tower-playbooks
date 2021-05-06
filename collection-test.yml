@@ -14,7 +14,7 @@
   roles:    
      - role: dsglaser.nginx.nginx
         
-  post-tasks:
+  post_tasks:
     - name: enable firewall
       firewalld:
         service: http
