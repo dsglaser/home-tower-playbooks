@@ -10,6 +10,6 @@
         sysctl_file: /etc/sysctl.conf
                                                                               
 
-    - name: Install NGINX on server
-      dsglaser.nginx:
+  roles:    
+     - role: dsglaser.nginx.nginx
         
