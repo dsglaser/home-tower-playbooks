@@ -3,10 +3,13 @@
   tasks:
 
 
-    - name: REmove kernel.panic entry from /etc/sysctl.conf
+    - name: Remove kernel.panic entry from /etc/sysctl.conf
       ansible.posix.sysctl:
         name: kernel.panic
         state: absent
         sysctl_file: /etc/sysctl.conf
                                                                               
 
+    - name: Install NGINX on server
+      dsglaser.nginx:
+        
