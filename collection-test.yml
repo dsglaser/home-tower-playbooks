@@ -1,4 +1,4 @@
-- hosts: localhost
+- hosts: tower_clients
   become: yes
   vars: 
   tasks:
