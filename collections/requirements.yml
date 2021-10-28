@@ -1,6 +1,0 @@
----
-collections:
- - name: dsglaser.nginx
-#   source: rh-certified_repo
- 
- - name: ansible.posix
