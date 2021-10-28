@@ -1,5 +1,5 @@
 ---
-- hosts: tower_clients
+- hosts: all
   become: yes
   vars_files: vars.yml
 
@@ -12,6 +12,8 @@
     yum:
       name: "{{ ansible_base_pkgs | union( ansible_opt_pkgs ) }}"
       state: "{{ package_state | default(omit) | string }}"
+    environment: 
+      JAVA_HOME: /usr/bin
 
   - name: Print local hosts
     debug:

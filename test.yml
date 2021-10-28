@@ -1,8 +1,19 @@
 ---
 - hosts: tower_clients
   become: yes
+  vars:
+    dhcp_server: false
+    dns_server: bob
 
   tasks:
+
+    - name: check vars
+      debug:
+        msg: "Variable item is not set to a valid value, please see readme"
+      when: not (item  == "true" or item == "false")
+      loop: 
+        - dhcp_server
+        - dns_server
 
     - name: Install packages
       yum:
