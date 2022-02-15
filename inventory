@@ -1,6 +1,6 @@
-all:
-  children:
-    tower_clients:
-      hosts:
-        10.8.109.213
-
+tower_clients:
+  hosts:
+    tower_client1:
+      ansible_host: 10.8.109.213
+    tower_client2:
+      ansible_host: 10.8.109.226
