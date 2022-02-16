@@ -2,7 +2,7 @@
 - hosts: tower_clients
   become: yes
   vars:
-    motd: "This machine is updated on"
+    motd: "This motd was updated on"
 
   tasks:
 
