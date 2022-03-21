@@ -10,7 +10,7 @@
   - name: Copy test file
     copy: 
       src: "./copy_files/testfile"
-      dest: /etc/testfile
+      dest: "{{ dest_dir }}/testfile"
       owner: root
       group: root
 

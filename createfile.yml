@@ -5,13 +5,15 @@
     motd: "This motd was updated on"
 
   tasks:
+    - name: set the message of the day on the machine
+      copy:
+        dest: /etc/motd
+        content: "{{ motd }} {{ ansible_date_time.date }}"
 
-      - name: set the message of the day on the machine
-        copy:
-          dest: /etc/motd
-          content: "{{ motd }} {{ ansible_date_time.date }}"
-          owner: root
-          group: root
-          mode: 0644
+- hosts: tower_clients
+  become: no
 
-
+  tasks:
+    - name: debug me
+      debug: 
+        msg: " another play! "
