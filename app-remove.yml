@@ -1,0 +1,32 @@
+---
+- hosts: tower_clients
+  become: yes
+
+  tasks:
+
+    - name: Stop webserver
+      service:
+        name: httpd
+        state: started
+      ignore_errors: true
+
+    - name: Remove packages
+      yum:
+        name: 
+          - httpd
+          - git
+        state: absent
+
+    - name: remove http port
+      firewalld:
+        service: http
+        permanent: yes
+        state: disabled
+        immediate: yes
+
+    - name: Remove directory
+      file:
+        path: /var/www/html
+        state: absent
+
+
