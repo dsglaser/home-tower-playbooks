@@ -1,0 +1,13 @@
+---
+- hosts: tower_clients
+  become: yes
+  vars:
+
+  tasks:
+
+    - name: Write to file
+      command: echo "adding machine {{ ansible_hostname }} at {{ ansible_date_time.iso8601 }}" >> /tmp/machine_log
+
+    - name: sleep
+      pause: 
+        seconds: 30
