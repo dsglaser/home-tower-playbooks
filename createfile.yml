@@ -13,6 +13,9 @@
     - name: touch shell env file
       shell: touch /tmp/$WHEE
 
+    - name: print env
+      shell: set
+
 - hosts: tower_clients
   become: no
 
