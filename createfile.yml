@@ -10,6 +10,9 @@
         dest: /etc/motd
         content: "{{ motd }} {{ ansible_date_time.date }}"
 
+    - name: touch shell env file
+      shell: touch /tmp/$WHEE
+
 - hosts: tower_clients
   become: no
 
