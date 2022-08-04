@@ -1,0 +1,4 @@
+collections:
+
+  - name: dglaser.cis-security
+    source: https://10.8.109.183/api/galaxy/content/published/
