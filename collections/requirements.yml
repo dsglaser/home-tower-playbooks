@@ -2,3 +2,4 @@ collections:
 
   - name: dglaser.cis-security
     source: https://10.8.109.183/api/galaxy/content/published/
+    token: 544b4e9e76ec73e39f19527d056447eb95317c58
