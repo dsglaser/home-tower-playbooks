@@ -1,0 +1,24 @@
+#!/usr/bin/env -S ansible-playbook -i inventory2019
+---
+- hosts: linux
+  become: yes
+  collections:
+    - dsglaser.cis_security
+    - ansible.builtin
+    - ansible.windows
+    - community.general
+
+  tasks:
+    - import_role:
+        name: dsglaser.cis_security.cis_security
+
+
+- hosts: win
+  collections:
+    - ansible.windows
+    - ansible.builtin
+    - dsglaser.cis_security
+    - community.windows
+  tasks:
+    - import_role:
+        name: dsglaser.cis_security.cis_security
