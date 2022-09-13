@@ -24,7 +24,7 @@
 
 
     - name: awx-manage help
-      shell: "/usr/bin/awx-manage help"
+      shell: "/bin/python3 /usr/bin/awx-manage help"
       delegate_to: localhost
 
 
