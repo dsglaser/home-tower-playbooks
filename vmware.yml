@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  connection: local
+  become: no
+  gather_facts: no
+  vars:
+    vcenter_hostname: vcsa.vmware.tamlab.rdu2.redhat.com
+    vcenter_username: dglaser@redhat.com
+    vcenter_password: XB-70optimus
+
+  tasks:
+  - name: Gather all registered virtual machines
+    community.vmware.vmware_vm_info:
+#      datacenter: "Datacenter"
+      hostname: '{{ vcenter_hostname }}'
+      username: '{{ vcenter_username }}'
+      password: '{{ vcenter_password }}'
+      validate_certs: false
+#      vm_name: "acarlos-rhel7-1"
+#    delegate_to: localhost
+    register: vminfo
+  
+  - debug:
+      var: vminfo.virtual_machines
