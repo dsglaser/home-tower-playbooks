@@ -1,0 +1,13 @@
+---
+- hosts: tower-clients
+  become: true
+  collections:
+    - redhat.rhel_system_roles
+  vars:
+    - cockpit_packages: default
+    - cockpit_port: 9090
+
+  roles:
+    - redhat.rhel_system_roles.cockpit
+
+
