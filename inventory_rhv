@@ -9,7 +9,7 @@ all:
         tower-client2:
           ansible_host: 10.8.109.162
     tower-clients:
-      chilren:
+      children:
         rhel7:
         rhel8:
 
