@@ -6,7 +6,6 @@
   vars:
     vcenter_hostname: vcsa.vmware.tamlab.rdu2.redhat.com
     vcenter_username: dglaser@redhat.com
-    vcenter_password: XB-70optimus
 
   tasks:
   - name: Gather all registered virtual machines
