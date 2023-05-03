@@ -1,0 +1,38 @@
+---
+- hosts: cis-linux
+  gather_facts: yes
+  become: yes
+  vars:
+    - product_name: zsh
+    - rpm_name: zsh
+
+  tasks:
+
+  - name: "print date and time using dot notation" 
+    debug:
+      msg: "{{ ansible_date_time.hour }}"
+  
+  - name: "print date and time using bracket notation"
+    debug: 
+      msg: "{{ ansible_facts['date_time']['hour'] }}"
+
+  - name: "set a fact on a host"
+    set_fact:
+      new_fact: "This_is_a_fact"
+
+  - name: "print the new fact"
+    debug:
+      msg: "{{ new_fact }}"
+
+  - name: "Set a fact if this is a Red Hat Enterprise Linux 8 machine"
+    set_fact:
+      new_RHEL8_fact: "This_is_a_RHEL8_machine"
+    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "8"
+
+  - name: "Set a fact if this is a Red Hat Enterprise LInux 7 machine"
+    set_fact:
+      new_RHEL7_fact: "This_is_a_RHEL7_machine"
+    when: ansible_distribution == "RedHat" and ansible_distribution_major_version == "7"
+
+
+

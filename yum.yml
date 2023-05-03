@@ -1,0 +1,26 @@
+---
+- hosts: cis-linux
+  become: yes
+  vars:
+    - product_name: zsh
+    - rpm_name: zsh
+
+  tasks:
+
+  - name: "Install {{ product_name }}"
+    yum:
+      name: "{{ rpm_name }}"
+      state: absent
+      update_cache: true
+      lock_timeout: 300
+    register: install_output
+  
+  - name: Report rpm install output
+    debug:
+      msg: "{{ install_output.results | list }}"
+    when: ansible_distribution_major_version == "8"
+
+  - name: Report rpm install output
+    debug:
+      msg: "{{ install_output.results | list }}"
+    when: ansible_distribution_major_version == "7"

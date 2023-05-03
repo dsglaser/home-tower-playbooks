@@ -6,10 +6,10 @@
 
     - name: Install packages
       yum:
-        name: 
+        name:
           - httpd
           - git
-        state: latest
+        state: present
 
     - name: Open http port
       firewalld:
@@ -23,11 +23,12 @@
         repo: ssh://git@github.com/dsglaser/ci_cd-app.git
         dest: /var/www/html
         key_file: /etc/repo_key
+        version: "master"
         accept_hostkey: yes
 
 
     - name: set selinux contexts
-      file: 
+      file:
         path: /var/www/html
         recurse: yes
         owner: apache
