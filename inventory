@@ -1,4 +1,26 @@
-[linux]
-#10.8.109.162
-192.168.122.37
-#10.8.109.233
+all:
+  children:
+    rhel7: 
+      hosts:
+        tower-client1: 
+          ansible_host: 10.8.109.243
+    rhel8:
+      hosts:
+        tower-client2:
+          ansible_host: 10.8.109.162
+    cis-rhel7:
+      hosts:
+        cis-rhel7:
+          ansible_host: 10.8.109.231
+    cis-rhel8:
+      hosts:
+        cis-rhel8:
+          ansible_host: 10.8.109.162	 
+    tower-clients:
+      children:
+        rhel7:
+        rhel8:
+    cis-linux:
+      children:
+        cis-rhel7:
+        cis-rhel8:
