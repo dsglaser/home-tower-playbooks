@@ -2,3 +2,4 @@
 collections:
 - fedora.linux_system_roles
 - ansible.tower
+- ansible.windows
